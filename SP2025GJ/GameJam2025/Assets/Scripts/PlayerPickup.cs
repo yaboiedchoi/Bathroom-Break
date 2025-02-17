@@ -20,5 +20,18 @@ public class PlayerPickup : MonoBehaviour
     void Update()
     {
         playerPickupObj.position = transform.position + playerLook.LookDirection * armLength;
+
+        if (CheckForObj())
+        {
+
+        }
+    }
+
+    bool CheckForObj()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, playerLook.LookDirection * armLength);
+
+        return false;
     }
 }
