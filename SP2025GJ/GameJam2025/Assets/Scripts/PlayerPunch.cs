@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
 public class PunchObject : MonoBehaviour
 {
-    [SerializeField] Camera playerCamera; //camera component attached to player obj
+    [SerializeField] Camera playerCamera; //camera component attached to player obj (set in editor)
     [SerializeField][Range(1.0f, 100.0f)] float punchForce = 10.0f; //force applied to punched objects
     [SerializeField][Range(1.0f, 20.0f)] float punchRange = 2.0f; //Range for raycast
 
