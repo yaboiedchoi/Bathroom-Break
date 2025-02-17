@@ -11,4 +11,6 @@ public class PlayerStats : ScriptableObject
     public float jumpForce;
     public float moveSmoothTime;
     public Vector2 sensitivity;
+    public float punchForce;
+    public float punchRange;
 }
