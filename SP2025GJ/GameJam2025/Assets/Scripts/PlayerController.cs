@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][Range(0.01f, 10.0f)] private float movementSpeed = 5.0f; //speed of movement
     [SerializeField][Range(0.01f, 10.0f)] private float rotationSpeed = 2.0f; //mouse sensitivity
     [SerializeField] private float gravity = 9.8f; //gravity force
-    [SerializeField][Range(0.01f, 5.0f)] float jumpForce = 2; //anime reference! should be greater than gravity
+   // [SerializeField][Range(0.01f, 5.0f)] float jumpForce = 2; //anime reference! should be greater than gravity
 
     private float verticalRotation = 0.0f; //vertical rotation to prevent rolling
     private Vector3 velocity; //velocity for gravity
@@ -45,10 +45,10 @@ public class PlayerController : MonoBehaviour
         {
             moveX = -1f;
         }
-        if (Input.GetKey(KeyCode.Space) && controller.isGrounded)
-        {
-            velocity.y += gravity * jumpForce;
-        }
+        //if (Input.GetKey(KeyCode.Space) && controller.isGrounded)
+        //{
+        //    velocity.y += gravity * jumpForce;
+        //}
 
         //Apply Movement
         Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
