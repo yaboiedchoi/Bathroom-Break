@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using QFSW;
+using QFSW.QC;
 
 public class PunchObject : MonoBehaviour
 {
     [SerializeField] Camera playerCamera; //camera component attached to player obj (set in editor)
-    [SerializeField][Range(1.0f, 100.0f)] float punchForce = 10.0f; //force applied to punched objects
-    [SerializeField][Range(1.0f, 20.0f)] float punchRange = 2.0f; //Range for raycast
+    [SerializeField] private PlayerStats playerStats;
 
     // Update is called once per frame
     void Update()
@@ -17,14 +18,14 @@ public class PunchObject : MonoBehaviour
             Punch();
         }
     }
-
+    [Command]
     void Punch()
     {
         //Used to store info about raycast
         //Going to be used for applying force at specific pos on ragdoll
         RaycastHit hit;
 
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, punchRange))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, playerStats.punchRange))
         {
             if (hit.rigidbody != null) //check if hit obj has a rigidbody
             {
@@ -33,7 +34,7 @@ public class PunchObject : MonoBehaviour
                 forceDirection = forceDirection.normalized; //Normalize the direction
 
                 //Apply hit to rigid body at single point
-                hit.rigidbody.AddForceAtPosition(forceDirection * punchForce, hitPoint, ForceMode.Impulse);
+                hit.rigidbody.AddForceAtPosition(forceDirection * playerStats.punchForce, hitPoint, ForceMode.Impulse);
             }
         }
     }

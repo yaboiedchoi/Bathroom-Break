@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9057244695906669023}
   - component: {fileID: 8664362497347251415}
   - component: {fileID: 8769940461818227101}
+  - component: {fileID: 9100782814079065665}
   m_Layer: 0
   m_Name: PlayerCapsule
   m_TagString: Untagged
@@ -174,7 +175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 8769940461818227101}
-  cam: {fileID: 9057244695906669023}
   movementSpeed: 3.55
   rotationSpeed: 1
   gravity: 9.8
@@ -204,3 +204,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9100782814079065665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6889486332118628834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4186a2cff298e547b2994c6e644a2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 9057244695906669023}
+  punchForce: 10
+  punchRange: 2
