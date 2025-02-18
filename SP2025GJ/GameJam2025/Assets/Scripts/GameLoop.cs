@@ -201,6 +201,7 @@ public class GameLoop : MonoBehaviour
         timer = 0;
         score = 0;
         lives = 3;
+        level = 0;
     }
 
     // public methods
