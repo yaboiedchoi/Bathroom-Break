@@ -19,3 +19,8 @@ MonoBehaviour:
   sensitivity: {x: 1.5, y: 1.5}
   punchForce: 1000
   punchRange: 2
+  interactDistance: 1.5
+  clickTimer: 0.2
+  HoverSprite: {fileID: 21300000, guid: d681275a4e84aa64aac82568fa20c409, type: 3}
+  ClickSprite: {fileID: 21300000, guid: cb0209062e209a3498bd04adadc7684a, type: 3}
+  CursorSprite: {fileID: 21300000, guid: 398d6c3f283c6404fad60dae9e481f2e, type: 3}

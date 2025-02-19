@@ -13,4 +13,9 @@ public class PlayerStats : ScriptableObject
     public Vector2 sensitivity;
     public float punchForce;
     public float punchRange;
+    public float interactDistance;
+    public float clickTimer;
+    public Sprite HoverSprite;
+    public Sprite ClickSprite;
+    public Sprite CursorSprite;
 }
