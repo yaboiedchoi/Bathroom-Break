@@ -8,6 +8,12 @@ public class AgentBehavior : MonoBehaviour
     [SerializeField]Transform playerTransform; //destination of agent
     [SerializeField]NavMeshAgent agent; //agent component
 
+    public enum AgentStates 
+    { 
+        Wander,
+        Ragdoll
+    }
+
     // Update is called once per frame
     void Update()
     {
