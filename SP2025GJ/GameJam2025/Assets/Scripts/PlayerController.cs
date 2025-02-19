@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //DEPRICATED MOVEMENT SCRIPT -- DO NOT USE -- USE PLAYER MOVEMENT INSTEAD
     //Components
     [SerializeField] CharacterController controller;
 
