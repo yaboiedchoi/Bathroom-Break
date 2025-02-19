@@ -31,16 +31,16 @@ public class AgentBehavior : MonoBehaviour
     {
         switch (currentState)
         {
+            //happen when agent is in its designated seat/position
             case AgentStates.Idle:
-                //happen when agent is in its designated seat/position
                 break;
+            //occurs when teacher leaves room
             case AgentStates.Wander:
                 //currently has agent follow player, will change
-              agent.SetDestination(playerTransform.position);
+                agent.SetDestination(playerTransform.position);
                 break;
+            //happens when the player picks up/punches the agent
             case AgentStates.Ragdoll:
-                //happens when the player picks up/punches the agent
-                agent.SetDestination(this.gameObject.transform.position);
                 break;
         }
 
