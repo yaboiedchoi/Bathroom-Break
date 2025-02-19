@@ -5,6 +5,8 @@ using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Controls the Crosshair on Gameplay UI
+
 public enum CursorStatus
 {
     Hovering,

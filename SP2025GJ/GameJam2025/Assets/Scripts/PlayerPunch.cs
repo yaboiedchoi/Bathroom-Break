@@ -36,6 +36,14 @@ public class PunchObject : MonoBehaviour
                 //Apply hit to rigid body at single point
                 hit.rigidbody.AddForceAtPosition(forceDirection * playerStats.punchForce, hitPoint, ForceMode.Impulse);
             }
+
+            //check if the object is an agent
+            AgentBehavior agent = hit.transform.gameObject.GetComponent<AgentBehavior>();
+            if (agent != null) //ensure the component exists
+            {
+                //set the agent to ragdoll
+                agent.SetState(AgentBehavior.AgentStates.Ragdoll);
+            }
         }
     }
 }
