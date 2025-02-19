@@ -19,7 +19,12 @@ public class AgentBehavior : MonoBehaviour
     }
 
     //character starts in wander
-    AgentStates currentState = AgentStates.Wander;
+    AgentStates currentState;
+
+    private void Start()
+    {
+        currentState = AgentStates.Wander;
+    }
 
     // Update is called once per frame
     void Update()
@@ -31,19 +36,22 @@ public class AgentBehavior : MonoBehaviour
                 break;
             case AgentStates.Wander:
                 //currently has agent follow player, will change
-                agent.SetDestination(playerTransform.position);
+              agent.SetDestination(playerTransform.position);
                 break;
             case AgentStates.Ragdoll:
                 //happens when the player picks up/punches the agent
+                agent.SetDestination(this.gameObject.transform.position);
                 break;
         }
+
+        Debug.Log("Agent State: " + currentState);
     }
 
     /// <summary>
     /// Changes the agent's state 
     /// </summary>
     /// <param name="newSate">new state for agent to be put in</param>
-    public void ChangeState(AgentStates newSate)
+    public void SetState(AgentStates newSate)
     {
         currentState = newSate;
     }
