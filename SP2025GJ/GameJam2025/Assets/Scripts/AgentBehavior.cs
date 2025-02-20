@@ -44,7 +44,7 @@ public class AgentBehavior : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Agent State: " + currentState);
+        //Debug.Log("Agent State: " + currentState);
     }
 
     /// <summary>
