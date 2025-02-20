@@ -38,7 +38,7 @@ public class PunchObject : MonoBehaviour
             }
 
             //check if the object is an agent
-            AgentBehavior agent = hit.transform.gameObject.GetComponent<AgentBehavior>();
+            AgentBehavior agent = hit.collider.GetComponentInParent<AgentBehavior>();
             if (agent != null) //ensure the component exists
             {
                 //set the agent to ragdoll

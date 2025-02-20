@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6093382373512210631}
   - component: {fileID: 790385770596989111}
   - component: {fileID: 7451139473090091940}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4253365597494050762}
   - component: {fileID: 4115751114820394369}
   - component: {fileID: 2461287651531319860}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 8814928963414600835}
   - component: {fileID: 7830948930153198410}
   - component: {fileID: 4603443787698308327}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 2846317578600179167}
   - component: {fileID: 5864468110314977222}
   - component: {fileID: 7601714244721635641}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,8 +355,8 @@ Transform:
   m_GameObject: {fileID: 7301462943263694649}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.00000011920929, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.33, z: 0}
+  m_LocalScale: {x: 0.63761, y: 0.63761, z: 0.63761}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6732166695949177268}
@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 1587183396809795545}
   - component: {fileID: 1147949545053110083}
   - component: {fileID: 8408003462869305750}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,6 +689,14 @@ PrefabInstance:
     - target: {fileID: 7774765303086189826, guid: 15621f9b0c0208c4a96354c2b5c8b081, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774765303086189826, guid: 15621f9b0c0208c4a96354c2b5c8b081, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721103818918047943, guid: 15621f9b0c0208c4a96354c2b5c8b081, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
