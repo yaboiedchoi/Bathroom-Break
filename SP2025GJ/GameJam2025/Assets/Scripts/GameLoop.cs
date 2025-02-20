@@ -73,9 +73,37 @@ public class GameLoop : MonoBehaviour
 
     // gamestate property, to be able to read current game state through singleton
     // TODO: SET PROPERTY TEMPORARY, SO REPLACE WITH A METHOD
-    public GameState GameState {
+    public GameState GameState 
+    {
         get { return gameState; }
         set { gameState = value; }
+    }
+
+    /// <summary>
+    /// Property for lives count
+    /// </summary>
+    public uint Lives 
+    {
+        get { return lives; }
+        set { lives = value; }
+    }
+
+    /// <summary>
+    /// Property for score
+    /// </summary>
+    public int Score 
+    {
+        get { return score; }
+        set { lives = value; }
+    }
+
+    /// <summary>
+    /// Property for timer
+    /// </summary>
+    public float Timer
+    {
+        get { return timer; }
+        set { timer = value; }
     }
 
     // Start is called before the first frame update
