@@ -94,7 +94,7 @@ public class GameLoop : MonoBehaviour
     public int Score 
     {
         get { return score; }
-        set { lives = value; }
+        set { score = value; }
     }
 
     /// <summary>
