@@ -17,7 +17,7 @@ MonoBehaviour:
   jumpForce: 5
   moveSmoothTime: 0.05
   sensitivity: {x: 1.5, y: 1.5}
-  punchForce: 1000
+  punchForce: 100
   punchRange: 2
   interactDistance: 1.5
   clickTimer: 0.2
