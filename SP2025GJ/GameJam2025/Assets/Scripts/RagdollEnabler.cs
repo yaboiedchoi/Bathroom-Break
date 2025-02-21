@@ -27,23 +27,30 @@ public class RagdollEnabler : MonoBehaviour
         rigidbodies = ragdoolRoot.GetComponentsInChildren<Rigidbody>();
         joints = ragdoolRoot.GetComponentsInChildren<CharacterJoint>();
         colliders = ragdoolRoot.GetComponentsInChildren<Collider>();
-    }
+
+        //switch (agentBehavior.GetState())
+        //{
+        //    case AgentBehavior.AgentStates.Idle:
+        //        break;
+        //    case AgentBehavior.AgentStates.Wander:
+        //        EnableAnimator();
+        //        break;
+        //    case AgentBehavior.AgentStates.Ragdoll:
+        //        EnableRagdoll();
+        //        break;
+        //}
 
 
-    private void Update()
-    {
-        switch (agentBehavior.GetState())
+        if (ragdollActive)
         {
-            case AgentBehavior.AgentStates.Idle:
-                break;
-            case AgentBehavior.AgentStates.Wander:
-                EnableAnimator();
-                break;
-            case AgentBehavior.AgentStates.Ragdoll:
-                EnableRagdoll();
-                break;
+            EnableRagdoll();
+        }
+        else
+        {
+            EnableAnimator();
         }
     }
+
 
     public void EnableRagdoll()
     {
