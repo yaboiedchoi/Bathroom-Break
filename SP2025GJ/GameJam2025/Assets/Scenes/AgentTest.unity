@@ -862,6 +862,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.99
       objectReference: {fileID: 0}
+    - target: {fileID: 5161792931876563646, guid: e5b993ad469d5314ca807c0e54e89275, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5252682845850649624, guid: e5b993ad469d5314ca807c0e54e89275, type: 3}
       propertyPath: m_Name
       value: Books
@@ -2792,6 +2796,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Window
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d39717e35c05804c85145989535e34d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3301,6 +3309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blackboard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: df0ca534503bd6b4fb917c2242c483df, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3761,6 +3773,10 @@ PrefabInstance:
     - target: {fileID: 1075680948280407412, guid: 12a3faf3eccd8ff4b9e7e56f3a6c50de, type: 3}
       propertyPath: m_CollisionDetection
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110584993689927535, guid: 12a3faf3eccd8ff4b9e7e56f3a6c50de, type: 3}
+      propertyPath: wakeUpTime
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1110584993689927535, guid: 12a3faf3eccd8ff4b9e7e56f3a6c50de, type: 3}
       propertyPath: playerTransform
@@ -4815,6 +4831,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.99
       objectReference: {fileID: 0}
+    - target: {fileID: 5161792931876563646, guid: e5b993ad469d5314ca807c0e54e89275, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5252682845850649624, guid: e5b993ad469d5314ca807c0e54e89275, type: 3}
       propertyPath: m_Name
       value: Books
@@ -5007,7 +5027,7 @@ GameObject:
   - component: {fileID: 1082372841}
   - component: {fileID: 1082372840}
   - component: {fileID: 1082372839}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Front Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6663,7 +6683,7 @@ GameObject:
   - component: {fileID: 1440836698}
   - component: {fileID: 1440836697}
   - component: {fileID: 1440836696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Back Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7357,6 +7377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrontDesk
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 84f3e5721efabdd4e88f920a0276276d, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7812,6 +7836,10 @@ PrefabInstance:
     - target: {fileID: 4865064391339405807, guid: e5b993ad469d5314ca807c0e54e89275, type: 3}
       propertyPath: m_LocalPosition.z
       value: -3.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161792931876563646, guid: e5b993ad469d5314ca807c0e54e89275, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5252682845850649624, guid: e5b993ad469d5314ca807c0e54e89275, type: 3}
       propertyPath: m_Name
@@ -8297,6 +8325,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -3.99
       objectReference: {fileID: 0}
+    - target: {fileID: 5161792931876563646, guid: e5b993ad469d5314ca807c0e54e89275, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5252682845850649624, guid: e5b993ad469d5314ca807c0e54e89275, type: 3}
       propertyPath: m_Name
       value: Books
@@ -8562,6 +8594,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4e473b45d6d70774ab66d7da42fb4049, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4e473b45d6d70774ab66d7da42fb4049, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8923,6 +8959,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3d39717e35c05804c85145989535e34d, type: 3}
       propertyPath: m_Name
       value: Window (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d39717e35c05804c85145989535e34d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9312,6 +9352,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: df0ca534503bd6b4fb917c2242c483df, type: 3}
       propertyPath: m_Name
       value: Blackboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: df0ca534503bd6b4fb917c2242c483df, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

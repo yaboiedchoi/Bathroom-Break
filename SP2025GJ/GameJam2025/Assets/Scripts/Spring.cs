@@ -67,6 +67,12 @@ public class Spring
         UpdateDampedSpringMotion(ref position, ref velocity, RestPosition, m_params);
     }
 
+    public void SetValues(float angularFrequency, float dampingRatio) 
+    {
+        this.angularFrequency = angularFrequency;
+        this.dampingRatio = dampingRatio;
+    }
+
     public void CalcDampedSpringMotionParams(
         ref tDampedSpringMotionParams pOutParams,
         float deltaTime, float angularFrequency, float dampingRatio)
