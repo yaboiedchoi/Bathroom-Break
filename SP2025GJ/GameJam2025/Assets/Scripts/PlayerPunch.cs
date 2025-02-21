@@ -37,11 +37,20 @@ public class PunchObject : MonoBehaviour
                 hit.rigidbody.AddForceAtPosition(forceDirection * playerStats.punchForce, hitPoint, ForceMode.Impulse);
             }
 
-            //check if the object is an agent
-            AgentBehavior agent = hit.collider.GetComponentInParent<AgentBehavior>();
+
+            //get game object from hit
+            GameObject hitObj = hit.transform.gameObject;
+
+            //get the top of the object hierarchy
+            while (hitObj.transform.parent != null)
+            {
+                hitObj = hitObj.transform.parent.gameObject;
+            }
+
+            //check if the object has an agent
+            AgentBehavior agent = hitObj.GetComponent<AgentBehavior>();
             if (agent != null) //ensure the component exists
             {
-                //set the agent to ragdoll
                 agent.SetState(AgentBehavior.AgentStates.Ragdoll);
             }
         }

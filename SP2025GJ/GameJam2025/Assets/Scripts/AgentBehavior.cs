@@ -52,13 +52,11 @@ public class AgentBehavior : MonoBehaviour
                 break;
             //happens when the player picks up/punches the agent
             case AgentStates.Ragdoll:
-
+                TrackRagdollBehavior();
                 break;
         }
 
         prevPos = transform.position;
-
-        //Debug.Log("Agent State: " + currentState);
     }
 
     /// <summary>
@@ -67,14 +65,18 @@ public class AgentBehavior : MonoBehaviour
     /// <param name="newSate">new state for agent to be put in</param>
     public void SetState(AgentStates newSate)
     {
+        Debug.Log($"Changing from {currentState} to {newSate}");
         currentState = newSate;
+        //reset tracking variables
+        isTrackingStillness = false;
+        timeStill = 0.0f;
     }
 
     private void TrackRagdollBehavior()
     {
         float changeInPos = Vector3.Distance(prevPos, transform.position);
         //have we been kind of still?
-        if (changeInPos < 0.2f)
+        if (changeInPos < minimumDistance)
         {
             //are we already tracking?
             if (!isTrackingStillness)

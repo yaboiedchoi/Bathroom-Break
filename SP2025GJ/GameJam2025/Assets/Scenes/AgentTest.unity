@@ -3763,6 +3763,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1110584993689927535, guid: 12a3faf3eccd8ff4b9e7e56f3a6c50de, type: 3}
+      propertyPath: wakeUpTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1110584993689927535, guid: 12a3faf3eccd8ff4b9e7e56f3a6c50de, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1498940365}
