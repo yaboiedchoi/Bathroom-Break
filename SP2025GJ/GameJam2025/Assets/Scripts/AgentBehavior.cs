@@ -72,6 +72,11 @@ public class AgentBehavior : MonoBehaviour
         timeStill = 0.0f;
     }
 
+    public AgentStates GetState()
+    {
+        return currentState;
+    }
+
     private void TrackRagdollBehavior()
     {
         float changeInPos = Vector3.Distance(prevPos, transform.position);

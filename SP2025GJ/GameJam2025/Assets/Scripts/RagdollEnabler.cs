@@ -8,9 +8,10 @@ public class RagdollEnabler : MonoBehaviour
     [SerializeField]
     private Animator animator;
     [SerializeField]
-    private Transform ragdoolRoot;    
+    private Transform ragdoolRoot;
     [SerializeField]
     private bool ragdollActive = false;
+    [SerializeField] AgentBehavior agentBehavior;
 
     // Private variables
     private CharacterJoint[] joints;
@@ -26,25 +27,31 @@ public class RagdollEnabler : MonoBehaviour
         rigidbodies = ragdoolRoot.GetComponentsInChildren<Rigidbody>();
         joints = ragdoolRoot.GetComponentsInChildren<CharacterJoint>();
         colliders = ragdoolRoot.GetComponentsInChildren<Collider>();
+    }
 
-        if(ragdollActive)
+
+    private void Update()
+    {
+        switch (agentBehavior.GetState())
         {
-            EnableRagdoll();
-        }
-        else
-        {
-            EnableAnimator();
+            case AgentBehavior.AgentStates.Idle:
+                break;
+            case AgentBehavior.AgentStates.Wander:
+                EnableAnimator();
+                break;
+            case AgentBehavior.AgentStates.Ragdoll:
+                EnableRagdoll();
+                break;
         }
     }
 
-   
     public void EnableRagdoll()
     {
         // Disable the animations
         animator.enabled = false;
 
         // Enable joint collision
-        foreach(CharacterJoint joint in joints)
+        foreach (CharacterJoint joint in joints)
         {
             joint.enableCollision = true;
 
@@ -58,7 +65,7 @@ public class RagdollEnabler : MonoBehaviour
         }
 
         // Enable physics based forces
-        foreach(Rigidbody rigidbody in rigidbodies)
+        foreach (Rigidbody rigidbody in rigidbodies)
         {
             rigidbody.velocity = Vector3.zero;
             rigidbody.detectCollisions = true;
@@ -107,30 +114,30 @@ public class RagdollEnabler : MonoBehaviour
         // Applies force to rigid bocy
         foreach (Rigidbody rigidbody in rigidbodies)
         {
-            rigidbody.AddForce(upForce, ForceMode.Impulse); 
+            rigidbody.AddForce(upForce, ForceMode.Impulse);
         }
     }
 
-    /// <summary>
-    /// Controls for enabling, disabling animations and ragdoll and button to apply upward force on gameobject
-    /// </summary>
-    private void OnGUI()
-    {
-        if (GUI.Button(new Rect(10, 10, 150, 50), "Enable Ragdoll"))
-        {
-            ragdollActive = true;
-            EnableRagdoll();
-        }
+    ///// <summary>
+    ///// Controls for enabling, disabling animations and ragdoll and button to apply upward force on gameobject
+    ///// </summary>
+    //private void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(10, 10, 150, 50), "Enable Ragdoll"))
+    //    {
+    //        ragdollActive = true;
+    //        EnableRagdoll();
+    //    }
 
-        if (GUI.Button(new Rect(10, 70, 150, 50), "Enable Animator"))
-        {
-            ragdollActive = false;
-            EnableAnimator();
-        }
+    //    if (GUI.Button(new Rect(10, 70, 150, 50), "Enable Animator"))
+    //    {
+    //        ragdollActive = false;
+    //        EnableAnimator();
+    //    }
 
-        if (GUI.Button(new Rect(10, 130, 150, 50), "Explode"))
-        {
-            ApplyExplosionForce();
-        }
-    }
+    //    if (GUI.Button(new Rect(10, 130, 150, 50), "Explode"))
+    //    {
+    //        ApplyExplosionForce();
+    //    }
+    //}
 }
