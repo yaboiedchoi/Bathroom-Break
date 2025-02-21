@@ -42,6 +42,12 @@ public class GameLoop : MonoBehaviour
     [SerializeField]
     private int score = 0;
 
+    [SerializeField]
+    private GameObject player;
+
+    private PlayerMovement _pm;
+    private PlayerLook _pl;
+
     // TIMERS
 
     // holds the counting timer
