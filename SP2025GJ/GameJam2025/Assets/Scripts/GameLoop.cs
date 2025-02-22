@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public enum GameState
@@ -47,6 +48,33 @@ public class GameLoop : MonoBehaviour
 
     private PlayerMovement _pm;
     private PlayerLook _pl;
+    private PlayerPickup _pp;
+    private PunchObject _po;
+    private PlayerInteract _pi;
+
+    // GameObjects
+
+    [SerializeField]
+    private GameObject chairDeskPrefab;
+
+    [SerializeField]
+    private GameObject playerPrefab;
+
+    [SerializeField]
+    private GameObject bookshelfPrefab;
+
+    [SerializeField]
+    private GameObject[] listOfActiveObj;
+
+    [SerializeField]
+    private GameObject menuUI;
+
+    // pause menu
+
+    private bool paused;
+
+    private bool isESCPressed;
+    private bool isESCPressedPrevious;
 
     // TIMERS
 
@@ -63,13 +91,13 @@ public class GameLoop : MonoBehaviour
     // used for level preview before starting the level
     // can be replaced by a bool like a Ready! button or something like that
     [SerializeField]
-    private float previewTime = 10;
+    private float previewTime = 5;
 
     // temporary for testing
     // used for success / failure screen time
     // can be replaced with a button boolean if needed
     [SerializeField]
-    private float sfTime = 10;
+    private float sfTime = 5;
 
     // holds the current gamestate
     [SerializeField]
@@ -112,21 +140,91 @@ public class GameLoop : MonoBehaviour
         set { timer = value; }
     }
 
+    public uint Level
+    {
+        get { return level; }
+        set { level = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         gameState = GameState.LevelPreview;
-        timer = 10;
+        timer = previewTime;
         level = 1;
+        listOfActiveObj = GameObject.FindGameObjectsWithTag("Reset");
+        _pl = player.GetComponent<PlayerLook>();
+        _pm = player.GetComponent<PlayerMovement>();
+        _pp = player.GetComponent<PlayerPickup>();
+        _po = player.GetComponent<PunchObject>();
+        _pi = player.GetComponent<PlayerInteract>();
+        isESCPressed = false;
+        isESCPressedPrevious = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(Cursor.visible);
+        // is tab key down?
+        isESCPressed = Input.GetKey(KeyCode.Tab);
+
+        // toggle pausing
+        // only will pause on first click of key
+        if (isESCPressed && !isESCPressedPrevious)
+        {
+            paused = !paused;
+        }
+
+        // if the game is not paused
+        if (!paused)
+        {
+            // check player movement, player should be able to move
+            // when unpaused,enable player movement and disable mouse
+            if (!_pl.enabled && !_pm.enabled)
+            {
+                _pl.enabled = true;
+                _pm.enabled = true;
+                _pp.enabled = true;
+                _po.enabled = true;
+                _pi.enabled = true;
+            }
+            // if cursor is visible
+            // turn cursor back invisible
+            if (Cursor.visible == true)
+            {
+                // disable cursor
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            // if Pause menu UI is open
+            if (menuUI.activeSelf)
+            {
+                menuUI.SetActive(false);
+            }
+        }
+
+        // FSM
         switch (gameState) 
         {
-            case GameState.LevelPreview: 
+            case GameState.LevelPreview:
                 // TODO: add level preview visuals
+
+                // disable all player interaction
+                if (_pl.enabled && _pm.enabled)
+                {
+                    _pl.enabled = false;
+                    _pm.enabled = false;
+                    _pp.enabled = false;
+                    _po.enabled = false;
+                    _pi.enabled = false;
+                }
+                if (Cursor.visible == false)
+                {
+                    // re enable cursor
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
 
                 // if timer runs out
                 if (timer <= 0)
@@ -137,9 +235,26 @@ public class GameLoop : MonoBehaviour
                     timer = gameTime;
                     gameState = GameState.Game;
                     gameSuccess = false;
+
+                    // reenable movement, if disabled
+                    if (!_pl.enabled && !_pm.enabled)
+                    {
+                        _pl.enabled = true;
+                        _pm.enabled = true;
+                        _pp.enabled = true;
+                        _po.enabled = true;
+                        _pi.enabled = true;
+                    }
+                    // if cursor is visible
+                    if (Cursor.visible == true)
+                    {
+                        // disable cursor
+                        Cursor.lockState = CursorLockMode.Locked;
+                        Cursor.visible = false;
+                    }
                 }
                 break;
-            case GameState.Game: 
+            case GameState.Game:
                 // TODO: add game visuals
 
                 // when timer is <= 0
@@ -155,8 +270,24 @@ public class GameLoop : MonoBehaviour
                     timer = sfTime;
                 }
                 break;
-            case GameState.Success: 
+            case GameState.Success:
                 // TODO: add level success visuals
+
+                // disable all player interaction
+                if (_pl.enabled && _pm.enabled)
+                {
+                    _pl.enabled = false;
+                    _pm.enabled = false;
+                    _pp.enabled = false;
+                    _po.enabled = false;
+                    _pi.enabled = false;
+                }
+                if (Cursor.visible == false)
+                {
+                    // re enable cursor
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
 
                 // when timer is <= 0
                 if (timer <= 0)
@@ -169,10 +300,27 @@ public class GameLoop : MonoBehaviour
                     // set gamestate to level preview
                     timer = previewTime;
                     gameState = GameState.LevelPreview;
+                    ResetGame();
                 }
                 break;
-            case GameState.Fail: 
+            case GameState.Fail:
                 // TODO: add level failure visuals
+
+                // disable all player interaction
+                if (_pl.enabled && _pm.enabled)
+                {
+                    _pl.enabled = false;
+                    _pm.enabled = false;
+                    _pp.enabled = false;
+                    _po.enabled = false;
+                    _pi.enabled = false;
+                }
+                if (Cursor.visible == false)
+                {
+                    // re enable cursor
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
 
                 // when timer is <= 0
                 if (timer <= 0)
@@ -195,8 +343,10 @@ public class GameLoop : MonoBehaviour
                     else {
                         // set level preview time
                         // set game state
+                        // reset placement of objects
                         timer = sfTime;
                         gameState = GameState.LevelPreview;
+                        ResetGame();
                     }
                 }
                 break;
@@ -208,6 +358,7 @@ public class GameLoop : MonoBehaviour
                 {
                     // reset all things
                     ResetAll();
+                    ResetGame();
                     // GOES BACK TO LEVEL PREVIEW, TEMPORARY FOR NOW
                     timer = sfTime;
                     gameState = GameState.LevelPreview;
@@ -218,11 +369,37 @@ public class GameLoop : MonoBehaviour
                 break;
         }
 
+
         // if timer is more than 0, count down
-        if (timer > 0) 
+        // stop timers if paused
+        if (timer > 0 && !paused) 
         {
             timer -= Time.deltaTime;
         }
+        if (paused)
+        {
+            // when paused, disable player movement and enable mouse
+            if (_pl.enabled && _pm.enabled)
+            {
+                _pl.enabled = false;
+                _pm.enabled = false;
+                _pp.enabled = false;
+                _po.enabled = false;
+                _pi.enabled = false;
+            }
+            if (Cursor.visible == false)
+            {
+                // re enable cursor
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            if (!menuUI.activeSelf)
+            {
+                menuUI.SetActive(true);
+            }
+        }
+
+        isESCPressedPrevious = isESCPressed;
     }
 
     // private methods
@@ -236,6 +413,11 @@ public class GameLoop : MonoBehaviour
         score = 0;
         lives = 3;
         level = 0;
+    }
+    
+    private void SkipGameState()
+    {
+        timer = 0;
     }
 
     // public methods
@@ -256,4 +438,27 @@ public class GameLoop : MonoBehaviour
     {
         score += points;
     }
+    public void ResetGame()
+    {
+        if (listOfActiveObj.Length != 3)
+        {
+            listOfActiveObj = GameObject.FindGameObjectsWithTag("Reset");
+        }
+
+        for (int i = 0; i < listOfActiveObj.Length; i++)
+        {
+            Destroy(listOfActiveObj[i]);
+        }
+        GameObject newPlayer = Instantiate(playerPrefab);
+        listOfActiveObj[0] = newPlayer;
+        player = newPlayer;
+        _pl = player.GetComponent<PlayerLook>();
+        _pm = player.GetComponent<PlayerMovement>();
+        _pp = player.GetComponent<PlayerPickup>();
+        _po = player.GetComponent<PunchObject>();
+        _pi = player.GetComponent<PlayerInteract>();
+        listOfActiveObj[1] = Instantiate(bookshelfPrefab);
+        listOfActiveObj[2] = Instantiate(chairDeskPrefab);
+    }
+
 }

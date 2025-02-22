@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 8408003462869305750}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Reset
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -685,6 +685,10 @@ PrefabInstance:
     - target: {fileID: 7528489542002181449, guid: 15621f9b0c0208c4a96354c2b5c8b081, type: 3}
       propertyPath: m_PlaneDistance
       value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528489542002181449, guid: 15621f9b0c0208c4a96354c2b5c8b081, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7774765303086189826, guid: 15621f9b0c0208c4a96354c2b5c8b081, type: 3}
       propertyPath: m_Name
