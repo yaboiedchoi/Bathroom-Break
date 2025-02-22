@@ -9,6 +9,9 @@ public class SpawnAgents : MonoBehaviour
 
     [SerializeField] GameObject agentPrefab;
     List<GameObject> agents = new List<GameObject>();
+    [SerializeField] float distanceFromSpawn = 0.2f;
+
+    float timeStarted;
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +32,20 @@ public class SpawnAgents : MonoBehaviour
         {
             SpawnAgent(pos);
         }
+
+        timeStarted = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        for (int i = 0; i < agents.Count; i++)
+        {
+            if (Vector3.Distance(agents[i].transform.position, spawnPositions[i]) < distanceFromSpawn && Time.time - timeStarted > 3.0f)
+            {
+                agents[i].GetComponent<AgentBehavior>().SetState(AgentBehavior.AgentStates.Idle);
+            }
+        }
     }
 
     void SpawnAgent(Vector3 position)
