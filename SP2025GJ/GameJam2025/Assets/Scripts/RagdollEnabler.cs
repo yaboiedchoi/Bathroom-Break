@@ -125,26 +125,26 @@ public class RagdollEnabler : MonoBehaviour
         }
     }
 
-    ///// <summary>
-    ///// Controls for enabling, disabling animations and ragdoll and button to apply upward force on gameobject
-    ///// </summary>
-    //private void OnGUI()
-    //{
-    //    if (GUI.Button(new Rect(10, 10, 150, 50), "Enable Ragdoll"))
-    //    {
-    //        ragdollActive = true;
-    //        EnableRagdoll();
-    //    }
+    /// <summary>
+    /// Controls for enabling, disabling animations and ragdoll and button to apply upward force on gameobject
+    /// </summary>
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(10, 10, 150, 50), "Enable Ragdoll"))
+        {
+            ragdollActive = true;
+            EnableRagdoll();
+        }
 
-    //    if (GUI.Button(new Rect(10, 70, 150, 50), "Enable Animator"))
-    //    {
-    //        ragdollActive = false;
-    //        EnableAnimator();
-    //    }
+        if (GUI.Button(new Rect(10, 70, 150, 50), "Enable Animator"))
+        {
+            ragdollActive = false;
+            EnableAnimator();
+        }
 
-    //    if (GUI.Button(new Rect(10, 130, 150, 50), "Explode"))
-    //    {
-    //        ApplyExplosionForce();
-    //    }
-    //}
+        if (GUI.Button(new Rect(10, 130, 150, 50), "Explode"))
+        {
+            ApplyExplosionForce();
+        }
+    }
 }
