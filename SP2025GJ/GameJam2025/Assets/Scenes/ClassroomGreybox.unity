@@ -4695,6 +4695,7 @@ MonoBehaviour:
   - {fileID: 7982981617765696763}
   - {fileID: 7982981617765696762}
   - {fileID: 7982981617765696761}
+  agentPrefab: {fileID: 4705094397037461852, guid: 4c31292a137503740b28b6fcf8348fee, type: 3}
 --- !u!1 &2090403500
 GameObject:
   m_ObjectHideFlags: 0
