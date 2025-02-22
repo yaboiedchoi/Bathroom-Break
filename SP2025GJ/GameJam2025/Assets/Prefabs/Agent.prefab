@@ -797,7 +797,7 @@ MonoBehaviour:
   animator: {fileID: 2080704899310731676}
   ragdoolRoot: {fileID: 5332273780446796774}
   ragdollActive: 0
-  agentBehavior: {fileID: 0}
+  agentBehavior: {fileID: -8625468622885965324}
   rigidbodies: []
   explosionForce: 50
 --- !u!195 &-7006045027508345077
@@ -834,10 +834,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9871e1a9067ac044dbba7f0879074f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  agent: {fileID: 0}
+  agent: {fileID: -7006045027508345077}
   wakeUpTime: 3
   minimumDistance: 0.2
+  wanderRadius: 10
+  wanderChangeTime: 5
 --- !u!1 &4796249085549519367 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: 39dcda116d754ec499db2b2b3f51c1cd, type: 3}
