@@ -70,6 +70,16 @@ public class GameLoop : MonoBehaviour
     [SerializeField]
     private GameObject menuUI;
 
+    // audio
+    [SerializeField]
+    private AudioClip theme;
+    [SerializeField]
+    private AudioClip yes;
+    [SerializeField]
+    private AudioClip no;
+    [SerializeField]
+    private AudioSource _as;
+
     // pause menu
 
     private bool paused;
@@ -258,6 +268,13 @@ public class GameLoop : MonoBehaviour
                 break;
             case GameState.Game:
                 // TODO: add game visuals
+                // play theme on game state
+                if (_as.isPlaying)
+                    _as.Stop();
+                if (_as.clip != theme)
+                    _as.clip = theme;
+                if (!_as.isPlaying)
+                    _as.Play();
 
                 // when timer is <= 0
                 if (timer <= 0)
@@ -270,6 +287,9 @@ public class GameLoop : MonoBehaviour
                         gameState = GameState.Fail;
                     // set timer to success/fail time
                     timer = sfTime;
+
+                    if (_as.isPlaying)
+                        _as.Stop();
                 }
                 break;
             case GameState.Success:
@@ -532,6 +552,15 @@ public class GameLoop : MonoBehaviour
                 timer = previewTime;
                 gameState = GameState.LevelPreview;
                 ResetGame();
+
+                // yes stinger
+                if (_as.isPlaying)
+                    _as.Stop();
+                if (_as.clip != yes)
+                    _as.clip = yes;
+                if (!_as.isPlaying)
+                    _as.Play();
+
                 break;
             case GameState.Fail:
                 // only goes to game over / preview
@@ -559,6 +588,15 @@ public class GameLoop : MonoBehaviour
                     gameState = GameState.LevelPreview;
                     ResetGame();
                 }
+
+                // no stinger
+                if (_as.isPlaying)
+                    _as.Stop();
+                if (_as.clip != no)
+                    _as.clip = no;
+                if (!_as.isPlaying)
+                    _as.Play();
+
                 break;
             case GameState.GameOver:
                 // only goes to level preview after fully resetted
@@ -568,6 +606,16 @@ public class GameLoop : MonoBehaviour
                 // GOES BACK TO LEVEL PREVIEW, TEMPORARY FOR NOW
                 timer = sfTime;
                 gameState = GameState.LevelPreview;
+
+
+                // no stinger
+                if (_as.isPlaying)
+                    _as.Stop();
+                if (_as.clip != no)
+                    _as.clip = no;
+                if (!_as.isPlaying)
+                    _as.Play();
+
                 break;
         }
     }
