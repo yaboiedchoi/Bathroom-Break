@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -225,7 +226,7 @@ public class GameLoop : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                 }
-
+                /*
                 // if timer runs out
                 if (timer <= 0)
                 {
@@ -253,6 +254,7 @@ public class GameLoop : MonoBehaviour
                         Cursor.visible = false;
                     }
                 }
+                */
                 break;
             case GameState.Game:
                 // TODO: add game visuals
@@ -288,7 +290,7 @@ public class GameLoop : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                 }
-
+                /*
                 // when timer is <= 0
                 if (timer <= 0)
                 {
@@ -302,6 +304,7 @@ public class GameLoop : MonoBehaviour
                     gameState = GameState.LevelPreview;
                     ResetGame();
                 }
+                */
                 break;
             case GameState.Fail:
                 // TODO: add level failure visuals
@@ -321,7 +324,7 @@ public class GameLoop : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                 }
-
+                /*
                 // when timer is <= 0
                 if (timer <= 0)
                 {
@@ -349,11 +352,29 @@ public class GameLoop : MonoBehaviour
                         ResetGame();
                     }
                 }
+                */
                 break;
-            case GameState.GameOver: 
+            case GameState.GameOver:
                 // TODO: add game over visuals 
-                
+
+                // disable all player interaction
+                if (_pl.enabled && _pm.enabled)
+                {
+                    _pl.enabled = false;
+                    _pm.enabled = false;
+                    _pp.enabled = false;
+                    _po.enabled = false;
+                    _pi.enabled = false;
+                }
+                if (Cursor.visible == false)
+                {
+                    // re enable cursor
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+
                 // when timer is <= 0
+                /*
                 if (timer <= 0)
                 {
                     // reset all things
@@ -363,6 +384,7 @@ public class GameLoop : MonoBehaviour
                     timer = sfTime;
                     gameState = GameState.LevelPreview;
                 }
+                */
                 break;
             default: 
                 Debug.LogError("gameState variable is corrupted or not set!");
@@ -461,4 +483,92 @@ public class GameLoop : MonoBehaviour
         listOfActiveObj[2] = Instantiate(chairDeskPrefab);
     }
 
+    /// <summary>
+    /// Change the Game State
+    /// </summary>
+    public void ChangeGameState()
+    {
+        // from which state?
+        switch (gameState)
+        {
+            case GameState.LevelPreview:
+                // level preview only goes to game
+                // set timer to gameTime
+                // and set gamestate to game
+                // reset game success too
+                timer = gameTime;
+                gameState = GameState.Game;
+                gameSuccess = false;
+
+                // reenable movement, if disabled
+                if (!_pl.enabled && !_pm.enabled)
+                {
+                    _pl.enabled = true;
+                    _pm.enabled = true;
+                    _pp.enabled = true;
+                    _po.enabled = true;
+                    _pi.enabled = true;
+                }
+                // if cursor is visible
+                if (Cursor.visible == true)
+                {
+                    // disable cursor
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+                break;
+            case GameState.Game:
+                // time based change, already coded into FSM
+                Debug.LogWarning("Cannot change out of Game, time based only!");
+                break;
+            case GameState.Success:
+                // only goes to level preview
+                // add points for success
+                // add 1 to level
+                score += 100;
+                level++;
+                // set timer to level preview
+                // set gamestate to level preview
+                timer = previewTime;
+                gameState = GameState.LevelPreview;
+                ResetGame();
+                break;
+            case GameState.Fail:
+                // only goes to game over / preview
+                // set timer to level preview
+                // set gamestate to game IF you have more than 0 lives, 
+                //if not, set gamestate to game over
+                timer = previewTime;
+                // subtract life
+                lives--;
+                // when you're out of lives
+                if (lives <= 0)
+                {
+                    // set game over time
+                    // and set game state to game over
+                    timer = sfTime;
+                    gameState = GameState.GameOver;
+                }
+                // when you still have lives
+                else
+                {
+                    // set level preview time
+                    // set game state
+                    // reset placement of objects
+                    timer = sfTime;
+                    gameState = GameState.LevelPreview;
+                    ResetGame();
+                }
+                break;
+            case GameState.GameOver:
+                // only goes to level preview after fully resetted
+                // reset all things
+                ResetAll();
+                ResetGame();
+                // GOES BACK TO LEVEL PREVIEW, TEMPORARY FOR NOW
+                timer = sfTime;
+                gameState = GameState.LevelPreview;
+                break;
+        }
+    }
 }
