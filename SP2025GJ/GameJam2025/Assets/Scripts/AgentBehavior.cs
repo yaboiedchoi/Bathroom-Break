@@ -7,7 +7,6 @@ using UnityEngine.AI;
 public class AgentBehavior : MonoBehaviour
 {
     [Header("Agent Components")]
-    [SerializeField] Transform playerTransform; //destination of agent
     [SerializeField] NavMeshAgent agent; //agent component
 
     [Header("Ragdoll Transition")]
@@ -16,6 +15,13 @@ public class AgentBehavior : MonoBehaviour
     private float timeStill; //time agent has not been moving for
     [SerializeField] float wakeUpTime = 3.0f; // time to wait before waking up (changing states) 
     [SerializeField][Range(0.01f, 1.0f)] float minimumDistance = 0.2f; //distance traveled to start transitioning out of ragdoll
+
+    [Header("Wander Behavior")]
+    [SerializeField] float wanderRadius = 10.0f;
+    [SerializeField] float wanderChangeTime = 5.0f;
+    private float wanderTimer;
+    private Vector3 currentDestination;
+
 
 
     /// <summary>
@@ -47,8 +53,7 @@ public class AgentBehavior : MonoBehaviour
                 break;
             //occurs when teacher leaves room
             case AgentStates.Wander:
-                //currently has agent follow player, will change
-                agent.SetDestination(playerTransform.position);
+                WanderBehavior();
                 break;
             //happens when the player picks up/punches the agent
             case AgentStates.Ragdoll:
@@ -107,6 +112,40 @@ public class AgentBehavior : MonoBehaviour
             //stop/dont track
             isTrackingStillness = false;
             timeStill = 0.0f;
+        }
+    }
+    /// <summary>
+    /// Wandering logic: Pick a new random destination every few seconds.
+    /// </summary>
+    private void WanderBehavior()
+    {
+        // Move agent towards current destination
+        agent.SetDestination(currentDestination);
+
+        // Update the wander timer
+        wanderTimer += Time.deltaTime;
+
+        // If it's time to pick a new destination, reset timer and choose a new point
+        if (wanderTimer >= wanderChangeTime)
+        {
+            PickRandomDestination();
+            wanderTimer = 0f;
+        }
+    }
+
+    /// <summary>
+    /// Picks a new random destination within the wander radius.
+    /// </summary>
+    private void PickRandomDestination()
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
+        randomDirection += transform.position; // Offset from the agent's current position
+
+        NavMeshHit navHit;
+        if (NavMesh.SamplePosition(randomDirection, out navHit, wanderRadius, NavMesh.AllAreas))
+        {
+            currentDestination = navHit.position;
+            Debug.Log($"New wander destination: {currentDestination}");
         }
     }
 }
