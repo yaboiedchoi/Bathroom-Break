@@ -8,8 +8,8 @@ public enum GameState
 {
     LevelPreview,
     Game,
-    Success, 
-    Fail, 
+    Success,
+    Fail,
     GameOver
 }
 
@@ -20,11 +20,11 @@ public class GameLoop : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this) 
+        if (instance != null && instance != this)
         {
             Destroy(this);
         }
-        else 
+        else
         {
             instance = this;
         }
@@ -70,6 +70,9 @@ public class GameLoop : MonoBehaviour
     [SerializeField]
     private GameObject menuUI;
 
+    [SerializeField]
+    private SpawnAgents agentManager;
+
     // audio
     [SerializeField]
     private AudioClip theme;
@@ -92,7 +95,7 @@ public class GameLoop : MonoBehaviour
     // holds the counting timer
     [SerializeField]
     private float timer = 0;
-    
+
     // temporary for testing, change later
     // max time allowed for gameplay
     [SerializeField]
@@ -118,7 +121,7 @@ public class GameLoop : MonoBehaviour
 
     // gamestate property, to be able to read current game state through singleton
     // TODO: SET PROPERTY TEMPORARY, SO REPLACE WITH A METHOD
-    public GameState GameState 
+    public GameState GameState
     {
         get { return gameState; }
         set { gameState = value; }
@@ -127,7 +130,7 @@ public class GameLoop : MonoBehaviour
     /// <summary>
     /// Property for lives count
     /// </summary>
-    public uint Lives 
+    public uint Lives
     {
         get { return lives; }
         set { lives = value; }
@@ -136,7 +139,7 @@ public class GameLoop : MonoBehaviour
     /// <summary>
     /// Property for score
     /// </summary>
-    public int Score 
+    public int Score
     {
         get { return score; }
         set { score = value; }
@@ -216,7 +219,7 @@ public class GameLoop : MonoBehaviour
         }
 
         // FSM
-        switch (gameState) 
+        switch (gameState)
         {
             case GameState.LevelPreview:
                 // TODO: add level preview visuals
@@ -267,6 +270,9 @@ public class GameLoop : MonoBehaviour
                 */
                 break;
             case GameState.Game:
+                //check if game has been won
+                gameSuccess = CheckForWin();
+
                 // TODO: add game visuals
                 // play theme on game state
                 if (_as.isPlaying)
@@ -280,10 +286,10 @@ public class GameLoop : MonoBehaviour
                 if (timer <= 0)
                 {
                     // if game was successful
-                    if (gameSuccess) 
+                    if (gameSuccess)
                         gameState = GameState.Success;
                     // if game was failed
-                    else 
+                    else
                         gameState = GameState.Fail;
                     // set timer to success/fail time
                     timer = sfTime;
@@ -291,6 +297,9 @@ public class GameLoop : MonoBehaviour
                     if (_as.isPlaying)
                         _as.Stop();
                 }
+
+
+
                 break;
             case GameState.Success:
                 // TODO: add level success visuals
@@ -406,7 +415,7 @@ public class GameLoop : MonoBehaviour
                 }
                 */
                 break;
-            default: 
+            default:
                 Debug.LogError("gameState variable is corrupted or not set!");
                 break;
         }
@@ -414,7 +423,7 @@ public class GameLoop : MonoBehaviour
 
         // if timer is more than 0, count down
         // stop timers if paused
-        if (timer > 0 && !paused) 
+        if (timer > 0 && !paused)
         {
             timer -= Time.deltaTime;
         }
@@ -456,7 +465,7 @@ public class GameLoop : MonoBehaviour
         lives = 3;
         level = 0;
     }
-    
+
     private void SkipGameState()
     {
         timer = 0;
@@ -467,7 +476,7 @@ public class GameLoop : MonoBehaviour
     /// <summary>
     /// Call this method when the player succeeds at a game
     /// </summary>
-    public void GameSuccess() 
+    public void GameSuccess()
     {
         gameSuccess = true;
     }
@@ -618,5 +627,21 @@ public class GameLoop : MonoBehaviour
 
                 break;
         }
+    }
+
+    private bool CheckForWin()
+    {
+        //get list of agents
+        List<GameObject> agents = agentManager.GetAgents();
+        //loop and check if all idle
+        foreach (GameObject agent in agents)
+        {
+            if (agent.GetComponent<AgentBehavior>().GetState() != AgentBehavior.AgentStates.Idle)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -53,4 +53,6 @@ public class SpawnAgents : MonoBehaviour
         GameObject newAgent = Instantiate(agentPrefab, position, Quaternion.identity);
         agents.Add(newAgent);
     }
+
+    public List<GameObject> GetAgents() { return agents; }
 }

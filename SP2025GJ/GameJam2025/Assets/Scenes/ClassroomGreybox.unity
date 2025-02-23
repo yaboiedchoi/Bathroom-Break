@@ -4550,6 +4550,7 @@ MonoBehaviour:
   bookshelfPrefab: {fileID: 8131398036469111310, guid: 1019620381b2cc246bc94a8de5fc57b3, type: 3}
   listOfActiveObj: []
   menuUI: {fileID: 1232835520}
+  agentManager: {fileID: 2072046390}
   theme: {fileID: 8300000, guid: 8c76cafdea3868248becd095fa3c5d14, type: 3}
   yes: {fileID: 8300000, guid: 5868b0b507a686f4faa578cbc3e17986, type: 3}
   no: {fileID: 8300000, guid: 178eac5d63f0d2d4588c8e794111a435, type: 3}
